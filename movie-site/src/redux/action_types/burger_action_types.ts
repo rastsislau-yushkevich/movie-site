@@ -1,0 +1,1 @@
+export const USER_BURGER_TOGGLE = "USER_BURGER_TOGGLE"
