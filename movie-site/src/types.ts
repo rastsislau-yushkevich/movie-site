@@ -17,21 +17,30 @@ type TabsState = {
 }
 
 type MoviesState = {
-    movies: MovieInfo[]
+    movies: SearchedMovieInfo[],
+    s: string
 }
 
-type MovieInfo = {
+type SearchedMovieInfo = {
     Title: string,
     Year: string,
-    imdbId: string,
+    imdbID: string,
     Type: string,
     Poster: string
 }
 
 type MoviesResponse = {
-    Search: MovieInfo[],
+    Search: SearchedMovieInfo[],
     totalResults: string,
     Response: string
 }
 
-export type { UserInfo, BurgerState, StoreState, TabsState, MovieInfo, MoviesResponse, MoviesState }
+type SearchedMovie = {
+    movieInfo: SearchedMovieInfo
+}
+
+type SearchParams = {
+    [index: string]: string
+}
+
+export type { UserInfo, BurgerState, StoreState, TabsState, SearchedMovieInfo, MoviesResponse, MoviesState, SearchedMovie, SearchParams }
