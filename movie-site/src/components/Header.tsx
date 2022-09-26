@@ -16,6 +16,7 @@ const Header = () => {
     const dispatch = useDispatch();
 
     const search = useSelector((state: StoreState) => state.movies.s);
+    const isSearch = !!search;
 
     const handleBurger = () => {
         console.log("burger")
@@ -36,7 +37,7 @@ const Header = () => {
             <div className="search">
                 <input type="text" className="search-input" placeholder="Search" value={search} onChange={handleSearchChange}/>
                 <button className="sort-btn" /*onClick={handleSearch}*/><MdSort /></button>
-                {/* <SearchResult /> */}
+                {search && <SearchResult />}
             </div>
             <div style={{position: "relative"}}>
                 <button onClick={handleBurger}><User username="Ilya Yushkevich"/></button>

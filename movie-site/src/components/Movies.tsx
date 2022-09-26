@@ -11,20 +11,21 @@ const Movies = () => {
     const movies = useSelector((state: StoreState) => state.movies.movies);
     const dispatch = useDispatch();
 
-    // const titleToSearch = useSelector((state: StoreState) => state.movies.s);
-    const titleToSearch = "Titanic";
+    let titleToSearch = useSelector((state: StoreState) => state.movies.s);
+    if(titleToSearch === "") {
+        titleToSearch = "titanic";
+    }
 
     useEffect(() => {
         dispatch(loadMovies({ s: titleToSearch }))
     }, [titleToSearch])
 
-    if(movies.length === 0) {
+    if(!movies || movies.length === 0) {
         return null
     }
 
     return(
         <div className="movies-page">
-            {/* {testData.map((movie, index) => <Movie key={index} movieInfo={movie}/>)} */}
             {movies.map((movie, index) => <MovieAlt key={index} Title={movie.Title} Poster={movie.Poster} Type={movie.Type} Year={movie.Year} imdbID={movie.imdbID}/>)}
         </div>
     )

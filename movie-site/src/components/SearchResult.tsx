@@ -1,19 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadMovies } from "../redux/action_creators/movies_action_creators";
+import { StoreState } from "../types";
 import { SearchedMovieComponent } from "./SearchedMovieComponent";
 
 const SearchResult = () => {
-    const testData = [ {
-        "Title": "Pirates of the Caribbean: At World's End",
-        "Year": "2007",
-        "imdbID": "tt0449088",
-        "Type": "movie",
-        "Poster": "https://m.media-amazon.com/images/M/MV5BMjIyNjkxNzEyMl5BMl5BanBnXkFtZTYwMjc3MDE3._V1_SX300.jpg"
-    }]
+    const dispatch = useDispatch();
+    const movies = useSelector((state: StoreState) => state.movies.movies);
+    const search = useSelector((state: StoreState) => state.movies.s);
+
+    useEffect(() => {
+        dispatch(loadMovies({s: search}));
+    }, [search])
+
+    if(!movies || movies.length === 0) {
+        return null;
+    }
 
     return(
         <div className="search-result">
-            <SearchedMovieComponent movieInfo={testData[0]}/>
-            <SearchedMovieComponent movieInfo={testData[0]}/>
+            {movies.map((movie, index) => <SearchedMovieComponent key={index} movieInfo={movie}/>)}
         </div>
     )
 }
