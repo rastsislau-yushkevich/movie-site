@@ -5,6 +5,8 @@ import { store } from "../redux/store";
 import { StoreState } from "../types";
 import { Movie } from "./Movie";
 import { MovieAlt } from "./MovieAlt";
+import Pagination from 'react-bootstrap/Pagination';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Movies = () => {
 
@@ -25,8 +27,27 @@ const Movies = () => {
     }
 
     return(
-        <div className="movies-page">
-            {movies.map((movie, index) => <MovieAlt key={index} Title={movie.Title} Poster={movie.Poster} Type={movie.Type} Year={movie.Year} imdbID={movie.imdbID}/>)}
+        <div className="movies">
+            <div className="movies-page">
+                {movies.map((movie, index) => <MovieAlt key={index} Title={movie.Title} Poster={movie.Poster} Type={movie.Type} Year={movie.Year} imdbID={movie.imdbID}/>)}
+            </div>
+            <div className="movies-footer">
+            <Pagination>
+                <Pagination.Prev />
+                <Pagination.Item>{1}</Pagination.Item>
+                <Pagination.Ellipsis />
+
+                <Pagination.Item>{10}</Pagination.Item>
+                <Pagination.Item>{11}</Pagination.Item>
+                <Pagination.Item active>{12}</Pagination.Item>
+                <Pagination.Item>{13}</Pagination.Item>
+                <Pagination.Item disabled>{14}</Pagination.Item>
+
+                <Pagination.Ellipsis />
+                <Pagination.Item>{20}</Pagination.Item>
+                <Pagination.Next />
+            </Pagination>
+            </div>
         </div>
     )
 }

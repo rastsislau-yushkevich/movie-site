@@ -27,17 +27,13 @@ const Header = () => {
         dispatch(searchMovies(e.target.value));
     }
 
-    // const handleSearch = () => {
-    //     dispatch(loadMovies({s: search}))
-    // }
-
     return(
         <div className="header">
             <div className="logo"><span>pix</span>ema</div>
             <div className="search">
                 <input type="text" className="search-input" placeholder="Search" value={search} onChange={handleSearchChange}/>
-                <button className="sort-btn" /*onClick={handleSearch}*/><MdSort /></button>
-                {search && <SearchResult />}
+                <button className="sort-btn"><MdSort /></button>
+                {/* {search && <SearchResult />} */}
             </div>
             <div style={{position: "relative"}}>
                 <button onClick={handleBurger}><User username="Ilya Yushkevich"/></button>

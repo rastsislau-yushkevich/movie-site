@@ -37,7 +37,6 @@ function* fetchMovies(action: any) {
 }
 
 function* watcherMovie() {
-    // yield takeEvery(SEARCH_MOVIE, fetchMovies);
     yield takeEvery(LOAD_MOVIES, fetchMovies);
 }
 
