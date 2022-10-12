@@ -1,38 +1,73 @@
-import React, { useEffect, useState } from "react";
-import { MdSort } from "react-icons/md"
+import React, { useCallback, useEffect, useState } from "react";
+import { BsSortUpAlt, BsSortDownAlt } from "react-icons/bs"
 import { useDispatch, useSelector } from "react-redux";
 import { toggleUserBurger } from "../redux/action_creators/burger_action_creators";
 import { loadMovies, searchMovies, setMovies } from "../redux/action_creators/movies_action_creators";
 import { store } from "../redux/store";
-import { StoreState } from "../types";
+import { SearchedMovieInfo, StoreState } from "../types";
 import { SearchedMovieComponent } from "./SearchedMovieComponent";
 import { SearchResult } from "./SearchResult";
 import { User } from "./User";
 import { BurgerUser } from "./UserBurger";
+import * as _ from "lodash";
 
 
 const Header = () => {
     const userBurger = useSelector((state: StoreState) => state.burger.open)
     const dispatch = useDispatch();
+    const [sortedAsc, setSortedAsc] = useState(false);
 
-    const search = useSelector((state: StoreState) => state.movies.s);
-    const isSearch = !!search;
+    const movies = useSelector((state: StoreState) => state.movies.movies);
+
+    function isIterable(obj: any) {
+        // checks for null and undefined
+        if (obj == null) {
+          return false;
+        }
+        return typeof obj[Symbol.iterator] === 'function';
+    }
+
+    let moviesArr: SearchedMovieInfo[] = [];
+    if(isIterable(movies.Search)) {
+        moviesArr = [...movies.Search];
+    }
+
+
+    const search = useSelector((state: StoreState) => state.movies.s); //не меняется после добавления дебаунса и сортировки
+
+    // const isSearch = !!search;
 
     const handleBurger = () => {
-        console.log("burger")
         dispatch(toggleUserBurger());
     }
 
-    const handleSearchChange = (e: any) => {
-        dispatch(searchMovies(e.target.value));
+    const handleSort = () => {
+        if(sortedAsc) {
+            movies.Search = moviesArr.sort((a, b) => {
+                return Number(b.Year)-Number(a.Year)
+            })
+            setSortedAsc(false);
+        } else {
+            movies.Search = moviesArr.sort((a, b) => {
+                return Number(a.Year)-Number(b.Year)
+            })
+            setSortedAsc(true);
+        }
+        dispatch(setMovies(movies));
     }
+
+    const handleSearchChange = (e: any) => {
+        dispatch(searchMovies(e.target.value))
+    }
+
+    const debouncedSearch = useCallback(_.debounce(handleSearchChange, 1000), [])
 
     return(
         <div className="header">
             <div className="logo"><span>pix</span>ema</div>
             <div className="search">
-                <input type="text" className="search-input" placeholder="Search" value={search} onChange={handleSearchChange}/>
-                <button className="sort-btn"><MdSort /></button>
+                <input type="text" className="search-input" placeholder="Search" onChange={debouncedSearch}/>
+                <button onClick={handleSort} className="sort-btn">{sortedAsc ? <BsSortUpAlt/> : <BsSortDownAlt />}</button>
                 {/* {search && <SearchResult />} */}
             </div>
             <div style={{position: "relative"}}>
