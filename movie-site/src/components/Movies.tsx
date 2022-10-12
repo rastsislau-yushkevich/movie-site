@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadMovies, searchMovies } from "../redux/action_creators/movies_action_creators";
 import { store } from "../redux/store";
@@ -10,8 +10,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Movies = () => {
 
-    const movies = useSelector((state: StoreState) => state.movies.movies);
+    console.log(store.getState());
+    let [currentPage, setCurrentPage] = useState(1);
+
+    const movies = useSelector((state: StoreState) => state.movies.movies.Search);
     const dispatch = useDispatch();
+    const totalResults = Number(useSelector((state: StoreState) => state.movies.movies.totalResults));
+    const pageCount = Math.ceil(totalResults/10);
 
     let titleToSearch = useSelector((state: StoreState) => state.movies.s);
     if(titleToSearch === "") {
@@ -19,8 +24,15 @@ const Movies = () => {
     }
 
     useEffect(() => {
-        dispatch(loadMovies({ s: titleToSearch }))
-    }, [titleToSearch])
+        dispatch(loadMovies({ s: titleToSearch, page: String(currentPage) }))
+    }, [titleToSearch, currentPage])
+
+    const handlePaginationClick = (e: any) => {
+        setCurrentPage(e.target.innerHTML)
+        // console.log("current page", currentPage);
+        console.log("target: ", e.target.innerHTML)
+        dispatch(loadMovies({ s: titleToSearch, page: String(currentPage) }))
+    }
 
     if(!movies || movies.length === 0) {
         return null
@@ -33,19 +45,18 @@ const Movies = () => {
             </div>
             <div className="movies-footer">
             <Pagination>
-                <Pagination.Prev />
-                <Pagination.Item>{1}</Pagination.Item>
-                <Pagination.Ellipsis />
+                {currentPage == 1 ? <Pagination.Prev disabled/> : <Pagination.Prev onClick={() => setCurrentPage(currentPage-1)}/> }
+                {/* <Pagination.Item onClick={(e) => handlePaginationClick(e)}>{1}</Pagination.Item> */}
+                {currentPage > 1 ? <Pagination.Item onClick={(e) => handlePaginationClick(e)}>{1}</Pagination.Item> : ""}
+                {currentPage > 2 ?<Pagination.Ellipsis /> : ""}
 
-                <Pagination.Item>{10}</Pagination.Item>
-                <Pagination.Item>{11}</Pagination.Item>
-                <Pagination.Item active>{12}</Pagination.Item>
-                <Pagination.Item>{13}</Pagination.Item>
-                <Pagination.Item disabled>{14}</Pagination.Item>
+                {currentPage > 3 ? <> <Pagination.Item onClick={(e) => handlePaginationClick(e)}>{+currentPage-2}</Pagination.Item><Pagination.Item onClick={(e) => handlePaginationClick(e)}>{+currentPage-1}</Pagination.Item> </> : ""}
+                <Pagination.Item active>{+currentPage}</Pagination.Item>
+                {pageCount - currentPage < 2 ? "" :<> <Pagination.Item onClick={(e) => handlePaginationClick(e)}>{+currentPage+1}</Pagination.Item><Pagination.Item onClick={(e) => handlePaginationClick(e)}>{+currentPage+2}</Pagination.Item></>}
+                {/* {pageCount - currentPage !== 0 ? <Pagination.Item onClick={(e) => handlePaginationClick(e)}>{+currentPage+2}</Pagination.Item> : ""} */}
 
-                <Pagination.Ellipsis />
-                <Pagination.Item>{20}</Pagination.Item>
-                <Pagination.Next />
+                {pageCount - currentPage < 2 ? "" : <Pagination.Ellipsis />}
+                {currentPage == pageCount ? <Pagination.Next disabled/> : <><Pagination.Item onClick={(e) => handlePaginationClick(e)}>{pageCount}</Pagination.Item><Pagination.Next onClick={() => setCurrentPage(currentPage+1)}/></>}
             </Pagination>
             </div>
         </div>

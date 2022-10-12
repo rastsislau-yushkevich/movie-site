@@ -6,7 +6,7 @@ import { SearchedMovieComponent } from "./SearchedMovieComponent";
 
 const SearchResult = () => {
     const dispatch = useDispatch();
-    const movies = useSelector((state: StoreState) => state.movies.movies);
+    const movies = useSelector((state: StoreState) => state.movies.movies.Search);
     const search = useSelector((state: StoreState) => state.movies.s);
 
     useEffect(() => {

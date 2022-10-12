@@ -17,7 +17,8 @@ type TabsState = {
 }
 
 type MoviesState = {
-    movies: SearchedMovieInfo[],
+    // movies: SearchedMovieInfo[],
+    movies: MoviesResponse
     s: string
 }
 

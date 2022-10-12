@@ -177,6 +177,24 @@
         padding: 20px;
         .pagination {
             margin: 0;
+            .page-item {
+                .page-link {
+                    background-color: darkgray;
+                    border: darkgray;
+                    color: #800080;
+                } 
+            }
+            .active {
+                .page-link {
+                    background-color: #800080;
+                    color: darkgray;
+                }
+            }
+            .disabled {
+                .page-link {
+                    color: gray;
+                }
+            }
         }
     }
 }

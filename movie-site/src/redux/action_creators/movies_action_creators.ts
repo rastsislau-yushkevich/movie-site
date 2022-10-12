@@ -7,7 +7,12 @@ const loadMovies = (searchInfo: SearchParams) => ({
     searchInfo
 })
 
-const setMovies = (movies: SearchedMovieInfo[]) => ({
+// const setMovies = (movies: SearchedMovieInfo[]) => ({
+//     type: SET_MOVIES,
+//     movies
+// })
+
+const setMovies = (movies: MoviesResponse) => ({
     type: SET_MOVIES,
     movies
 })
@@ -22,18 +27,23 @@ const buildQueryString = (search: SearchParams) => {
     for(let key in search) {
         url.searchParams.set(key, search[key]);
     }
+    console.log(url)
     return url;
 }
 
 function* fetchMovies(action: any) {
-    let { s } = action.searchInfo;
+    let { s, page } = action.searchInfo;
     if(s === undefined) {
         s = "end"
     }
-    console.log(s);
-    const data: Response = yield fetch(buildQueryString({s}));
+    if(page === undefined) {
+        page = "1"
+    }
+    console.log("page in creator" ,page);
+    const data: Response = yield fetch(buildQueryString({s, page}));
     const movies: MoviesResponse = yield data.json();
-    yield put(setMovies(movies.Search));
+    // yield put(setMovies(movies.Search));
+    yield put(setMovies(movies))
 }
 
 function* watcherMovie() {
