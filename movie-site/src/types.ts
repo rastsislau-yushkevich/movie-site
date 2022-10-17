@@ -18,8 +18,9 @@ type TabsState = {
 
 type MoviesState = {
     // movies: SearchedMovieInfo[],
-    movies: MoviesResponse
-    s: string
+    movies: MoviesResponse,
+    s: string,
+    selectedMovie: SelectedMovie
 }
 
 type SearchedMovieInfo = {
@@ -44,4 +45,36 @@ type SearchParams = {
     [index: string]: string
 }
 
-export type { UserInfo, BurgerState, StoreState, TabsState, SearchedMovieInfo, MoviesResponse, MoviesState, SearchedMovie, SearchParams }
+type SelectedMovie = {
+    Title: string,
+    Genre: string,
+    Year: string,
+    Rated: string,
+    Released: string,
+    Runtime: string,
+    Director: string,
+    Writer: string,
+    Actors: string,
+    Plot: string,
+    Poster: string,
+    Language: string,
+    Country: string,
+    Awards: string,
+    Ratings: RatingTemplate[],
+    Metascore: string,
+    imdbVotes: string,
+    imdbID: string,
+    Type: string,
+    DVD: string,
+    BoxOffice: string,
+    Production: string,
+    Website: string,
+    Response: string
+}
+
+type RatingTemplate = {
+    Source: string,
+    Value: string
+}
+
+export type { UserInfo, BurgerState, StoreState, TabsState, SearchedMovieInfo, MoviesResponse, MoviesState, SearchedMovie, SearchParams, SelectedMovie, RatingTemplate }

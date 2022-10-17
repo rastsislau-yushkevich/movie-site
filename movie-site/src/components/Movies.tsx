@@ -7,6 +7,7 @@ import { Movie } from "./Movie";
 import { MovieAlt } from "./MovieAlt";
 import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from "react-router-dom";
 
 const Movies = () => {
 
@@ -41,7 +42,7 @@ const Movies = () => {
     return(
         <div className="movies">
             <div className="movies-page">
-                {movies.map((movie, index) => <MovieAlt key={index} Title={movie.Title} Poster={movie.Poster} Type={movie.Type} Year={movie.Year} imdbID={movie.imdbID}/>)}
+                {movies.map((movie, index) =><Link to={`${movie.imdbID}`}><MovieAlt key={index} Title={movie.Title} Poster={movie.Poster} Type={movie.Type} Year={movie.Year} imdbID={movie.imdbID}/> </Link>)}
             </div>
             <div className="movies-footer">
             <Pagination>

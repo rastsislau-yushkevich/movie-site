@@ -1,9 +1,10 @@
 import { MoviesState } from "../../types"
-import { SEARCH_MOVIE, SET_MOVIES } from "../action_types/movies_action_types"
+import { SEARCH_MOVIE, SET_MOVIES, SET_SELECTED_MOVIE } from "../action_types/movies_action_types"
 
 const initialState = {
     movies: {Search: [], totalResults: "0", Response: "true"},
-    s: ""
+    s: "",
+    selectedMovie: { Title: "", Genre: "", Year: "", Rated: "", Released: "", Runtime: "", Director: "", Writer: "", Actors: "", Plot: "", Poster: "", Language: "", Country: "", Awards: "", Ratings: [], Metascore: "", imdbVotes: "", imdbID: "", Type: "", DVD: "", BoxOffice: "", Production: "", Website: "", Response: ""}
 }
 
 export default (state: MoviesState = initialState, action: any) => {
@@ -18,6 +19,12 @@ export default (state: MoviesState = initialState, action: any) => {
             return({
                 ...state,
                 s: action.s
+            })
+        }
+        case SET_SELECTED_MOVIE: {
+            return({
+                ...state,
+                selectedMovie: action.selectedMovie
             })
         }
         default: {

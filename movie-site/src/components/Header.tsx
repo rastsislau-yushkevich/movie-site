@@ -10,6 +10,7 @@ import { SearchResult } from "./SearchResult";
 import { User } from "./User";
 import { BurgerUser } from "./UserBurger";
 import * as _ from "lodash";
+import { Link } from "react-router-dom";
 
 
 const Header = () => {
@@ -64,7 +65,7 @@ const Header = () => {
 
     return(
         <div className="header">
-            <div className="logo"><span>pix</span>ema</div>
+            <div className="logo"><Link to="/"><span>pix</span>ema</Link></div>
             <div className="search">
                 <input type="text" className="search-input" placeholder="Search" onChange={debouncedSearch}/>
                 <button onClick={handleSort} className="sort-btn">{sortedAsc ? <BsSortUpAlt/> : <BsSortDownAlt />}</button>

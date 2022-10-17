@@ -1,3 +1,5 @@
 export const SET_MOVIES = "SET_MOVIES";
 export const LOAD_MOVIES = "LOAD_MOVIES";
 export const SEARCH_MOVIE = "SEARCH_MOVIE";
+export const LOAD_SELECTED_MOVIE = "LOAD_SELECTED_MOVIE";
+export const SET_SELECTED_MOVIE = "SET_SELECTED_MOVIE";

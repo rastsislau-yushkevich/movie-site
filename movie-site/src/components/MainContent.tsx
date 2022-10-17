@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Movies } from "./Movies";
 import { Navigation } from "./Navigation";
+import { SelectedPost } from "./SelectedPost";
+import { SignIn } from "./SignIn";
 import { SignUp } from "./SignUp";
 
 const MainContent = () => {
@@ -11,9 +13,9 @@ const MainContent = () => {
             <Routes>
                 <Route path="/">
                     <Route index element={<Movies />}/>
-                </Route>
-                <Route path="/signup">
-                    <Route index element={<SignUp />}/>
+                    <Route path=":id" element={<SelectedPost />}/>
+                    <Route path="signup" element={<SignUp />}/>
+                    <Route path="signin" element={<SignIn />}/>
                 </Route>
             </Routes>
         </div>

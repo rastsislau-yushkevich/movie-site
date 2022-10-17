@@ -25,10 +25,14 @@
     background-color: #000;
     z-index: 10;
     .logo {
-        font-family: "BlackOps";
-        font-size: 35px;
-        span {
-            color: purple;
+        a {
+            font-family: "BlackOps";
+            font-size: 35px;
+            text-decoration: none;
+            color: #fff;
+            span {
+                color: purple;
+            }
         }
     }
     .search {
@@ -127,6 +131,10 @@
         flex-wrap: wrap;
         padding: 0 20px 20px 20px;
         justify-content: center;
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
         .movie {
             max-height: 350px;
             width: 190px;
@@ -254,6 +262,39 @@
         }
     }
 
+}
+
+.selected-post {
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        margin-bottom: 10px;
+        padding: 0;
+    }
+    display: flex;
+    padding: 20px;
+    .img-wrapper {
+        margin-right: 20px;
+        img {
+            border-radius: 5px;
+        }
+    }
+    .genres {
+        color: darkgrey;
+    }
+    .rating {
+        padding: 5px;
+        border-radius: 5px;
+    }
+    .good {
+        background-color: green;
+    }
+    .ok {
+        background-color: orange;
+    }
+    .bad {
+        background-color: red;
+    }
 }
 
 
