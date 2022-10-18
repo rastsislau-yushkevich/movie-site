@@ -1,3 +1,5 @@
+import { Themes } from "./constants"
+
 type UserInfo = {
     username: string
 }
@@ -9,7 +11,8 @@ type BurgerState = {
 type StoreState = {
     burger: BurgerState,
     user: UserState, 
-    movies: MoviesState
+    movies: MoviesState,
+    theme: ThemeState
 }
 
 type TabsState = {
@@ -93,4 +96,8 @@ type UserState = {
     user: User | null
 }
 
-export type { UserInfo, BurgerState, StoreState, TabsState, SearchedMovieInfo, MoviesResponse, MoviesState, SearchedMovie, SearchParams, SelectedMovie, RatingTemplate, User, JwtResponse, UserState }
+type ThemeState = {
+    theme: Themes
+}
+
+export type { UserInfo, BurgerState, StoreState, TabsState, SearchedMovieInfo, MoviesResponse, MoviesState, SearchedMovie, SearchParams, SelectedMovie, RatingTemplate, User, JwtResponse, UserState, ThemeState }

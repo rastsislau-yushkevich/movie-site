@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadMovies, searchMovies } from "../redux/action_creators/movies_action_creators";
-import { store } from "../redux/store";
+import { loadMovies } from "../redux/action_creators/movies_action_creators";
 import { StoreState } from "../types";
-import { Movie } from "./Movie";
 import { MovieAlt } from "./MovieAlt";
 import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
 
-const Movies = () => {
+const Trends = () => {
 
     let [currentPage, setCurrentPage] = useState(1);
 
@@ -21,8 +19,19 @@ const Movies = () => {
 
     let titleToSearch = useSelector((state: StoreState) => state.movies.s);
     if(titleToSearch === "") {
-        titleToSearch = "titanic";
+        titleToSearch = "fight";
     }
+
+    const newMovies = [...movies];
+    newMovies.sort((a, b) => {
+        if(a.Title > b.Title) {
+            return 1;
+        }
+        if(a.Title < b.Title) {
+            return -1;
+        }
+        return 0;
+    })
 
     useEffect(() => {
         dispatch(loadMovies({ s: titleToSearch, page: String(currentPage) }))
@@ -40,7 +49,7 @@ const Movies = () => {
     return(
         <div className={`movies movies-${theme}`}>
             <div className="movies-page">
-                {movies.map((movie, index) =><Link to={`${movie.imdbID}`} key={index}><MovieAlt Title={movie.Title} Poster={movie.Poster} Type={movie.Type} Year={movie.Year} imdbID={movie.imdbID}/> </Link>)}
+                {newMovies.map((movie, index) =><Link to={`${movie.imdbID}`} key={index}><MovieAlt Title={movie.Title} Poster={movie.Poster} Type={movie.Type} Year={movie.Year} imdbID={movie.imdbID}/> </Link>)}
             </div>
             <div className="movies-footer">
             <Pagination>
@@ -62,4 +71,4 @@ const Movies = () => {
     )
 }
 
-export { Movies }
+export { Trends }

@@ -5,7 +5,11 @@ import { store } from "../redux/store";
 import { StoreState } from "../types";
 
 const SelectedPost = () => {
-    const searchId = window.location.href.split("/")[3];
+    const validId = new RegExp('[a-z]{2}[0-9]{7}');
+    let searchId = window.location.href.split("/")[3];
+    if(!validId.test(searchId)) {
+        searchId = window.location.href.split("/")[4];
+    }
 
     const dispatch = useDispatch();
 

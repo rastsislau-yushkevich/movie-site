@@ -18,6 +18,7 @@ const Header = () => {
     const dispatch = useDispatch();
     const [sortedAsc, setSortedAsc] = useState(false);
     const currentUser = useSelector((state: StoreState) => state.user.user);
+    const theme = useSelector((state: StoreState) => state.theme.theme);
 
     const movies = useSelector((state: StoreState) => state.movies.movies);
 
@@ -65,7 +66,7 @@ const Header = () => {
     const debouncedSearch = useCallback(_.debounce(handleSearchChange, 1000), [])
 
     return(
-        <div className="header">
+        <div className={`header header-${theme}`}>
             <div className="logo"><Link to="/"><span>pix</span>ema</Link></div>
             <div className="search">
                 <input type="text" className="search-input" placeholder="Search" onChange={debouncedSearch}/>

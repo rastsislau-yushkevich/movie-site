@@ -5,4 +5,9 @@ enum Tabs {
     settings = "settings"
 }
 
-export { Tabs }
+enum Themes {
+    dark = "dark",
+    light = "light"
+}
+
+export { Tabs, Themes }
