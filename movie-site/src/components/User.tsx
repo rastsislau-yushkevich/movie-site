@@ -1,18 +1,17 @@
 import React from "react";
-import { UserInfo } from "../types";
+import { useSelector } from "react-redux";
+import { StoreState, UserInfo } from "../types";
 
-const User = (props: UserInfo) => {
-    const { username } = props;
+const User = () => {
+    const currentUser = useSelector((state: StoreState) => state.user.user);
 
     return(
         <div className="user">
             <div className="user-avatar">
-                {username.split(" ").map((el, index) => {
-                    return(<span key={index}>{el.charAt(0)}</span>)
-                })}
+                {currentUser?.username?.charAt(0)}
             </div>
             <div className="username">
-                {username}
+                {currentUser?.username}
             </div>
         </div>    
     )

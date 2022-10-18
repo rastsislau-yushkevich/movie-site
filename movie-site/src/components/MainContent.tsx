@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import { store } from "../redux/store";
+import { StoreState } from "../types";
 import { Movies } from "./Movies";
 import { Navigation } from "./Navigation";
 import { SelectedPost } from "./SelectedPost";

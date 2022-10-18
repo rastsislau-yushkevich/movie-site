@@ -8,7 +8,7 @@ type BurgerState = {
 
 type StoreState = {
     burger: BurgerState,
-    tabs: TabsState, 
+    user: UserState, 
     movies: MoviesState
 }
 
@@ -77,4 +77,20 @@ type RatingTemplate = {
     Value: string
 }
 
-export type { UserInfo, BurgerState, StoreState, TabsState, SearchedMovieInfo, MoviesResponse, MoviesState, SearchedMovie, SearchParams, SelectedMovie, RatingTemplate }
+type User = {
+    id?: number,
+    username?: string,
+    email: string,
+    password: string
+}
+
+type JwtResponse = {
+    access: string,
+    refresh: string
+}
+
+type UserState = {
+    user: User | null
+}
+
+export type { UserInfo, BurgerState, StoreState, TabsState, SearchedMovieInfo, MoviesResponse, MoviesState, SearchedMovie, SearchParams, SelectedMovie, RatingTemplate, User, JwtResponse, UserState }

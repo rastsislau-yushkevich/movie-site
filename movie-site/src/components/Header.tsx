@@ -17,6 +17,7 @@ const Header = () => {
     const userBurger = useSelector((state: StoreState) => state.burger.open)
     const dispatch = useDispatch();
     const [sortedAsc, setSortedAsc] = useState(false);
+    const currentUser = useSelector((state: StoreState) => state.user.user);
 
     const movies = useSelector((state: StoreState) => state.movies.movies);
 
@@ -72,7 +73,7 @@ const Header = () => {
                 {/* {search && <SearchResult />} */}
             </div>
             <div style={{position: "relative"}}>
-                <button onClick={handleBurger}><User username="Ilya Yushkevich"/></button>
+                {currentUser ? <button onClick={handleBurger}><User/></button> : <Link to="/signin" style={{backgroundColor: "darkgrey", padding: "10px", borderRadius: "10px", textDecoration: "none", color: "white"}}>Login</Link>}
                 {userBurger && <BurgerUser />}
             </div>
         </div>

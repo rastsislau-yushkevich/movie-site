@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 
 const Movies = () => {
 
-    console.log(store.getState());
     let [currentPage, setCurrentPage] = useState(1);
 
     const movies = useSelector((state: StoreState) => state.movies.movies.Search);
@@ -30,7 +29,6 @@ const Movies = () => {
 
     const handlePaginationClick = (e: any) => {
         setCurrentPage(e.target.innerHTML)
-        // console.log("current page", currentPage);
         console.log("target: ", e.target.innerHTML)
         dispatch(loadMovies({ s: titleToSearch, page: String(currentPage) }))
     }
@@ -42,7 +40,7 @@ const Movies = () => {
     return(
         <div className="movies">
             <div className="movies-page">
-                {movies.map((movie, index) =><Link to={`${movie.imdbID}`}><MovieAlt key={index} Title={movie.Title} Poster={movie.Poster} Type={movie.Type} Year={movie.Year} imdbID={movie.imdbID}/> </Link>)}
+                {movies.map((movie, index) =><Link to={`${movie.imdbID}`} key={index}><MovieAlt Title={movie.Title} Poster={movie.Poster} Type={movie.Type} Year={movie.Year} imdbID={movie.imdbID}/> </Link>)}
             </div>
             <div className="movies-footer">
             <Pagination>

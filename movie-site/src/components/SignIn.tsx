@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { signIn } from "../redux/action_creators/user_action_creator";
 
 const SignIn = () => {
-
-    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const dispatch = useDispatch();
+
     const handleInputChange = (e: any, setter: Function) => {
         setter(e.target.value);
+        console.log("email:", email);
+        console.log("password: ", password);
     }
 
-    const onSignIn = () => {
-
+    const onSignIn = (e: any) => {
+        dispatch(signIn({email, password}))
+        e.preventDefault();
     }
 
     return(
@@ -27,7 +32,7 @@ const SignIn = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control value={password} type="password" placeholder="Enter password" onClick={(e) => handleInputChange(e, setPassword)}/>
+                    <Form.Control type="password" placeholder="Enter password" value={password} onChange={(e) => handleInputChange(e, setPassword)}/>
                 </Form.Group>
 
                 <Button variant="primary" type="submit" onClick={onSignIn}>

@@ -38,7 +38,6 @@ const buildQueryString = (search: SearchParams) => {
     for(let key in search) {
         url.searchParams.set(key, search[key]);
     }
-    console.log(url)
     return url;
 }
 
