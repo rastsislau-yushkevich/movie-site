@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/movie-site/static/css/main.cfe94324.css",
-    "main.js": "/movie-site/static/js/main.d60ec198.js",
+    "main.js": "/movie-site/static/js/main.952ac04a.js",
     "static/media/BlackOpsOne-Regular.ttf": "/movie-site/static/media/BlackOpsOne-Regular.b8437be32fe8faca71ed.ttf",
     "index.html": "/movie-site/index.html",
     "main.cfe94324.css.map": "/movie-site/static/css/main.cfe94324.css.map",
-    "main.d60ec198.js.map": "/movie-site/static/js/main.d60ec198.js.map"
+    "main.952ac04a.js.map": "/movie-site/static/js/main.952ac04a.js.map"
   },
   "entrypoints": [
     "static/css/main.cfe94324.css",
-    "static/js/main.d60ec198.js"
+    "static/js/main.952ac04a.js"
   ]
 }
