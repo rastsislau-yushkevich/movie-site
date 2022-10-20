@@ -34,7 +34,7 @@ const setSelectedMovie = (selectedMovie: SelectedMovie) => ({
 })
 
 const buildQueryString = (search: SearchParams) => {
-    let url = new URL("http://www.omdbapi.com/?apikey=d6201460&s='end'");
+    let url = new URL("https://www.omdbapi.com/?apikey=d6201460&s='end'");
     for(let key in search) {
         url.searchParams.set(key, search[key]);
     }
@@ -56,7 +56,7 @@ function* fetchMovies(action: any) {
 
 function* fetchSelectedMovie(action: any) {
     let { selectedMovieId } = action;
-    const data: Response = yield fetch(`http://www.omdbapi.com/?apikey=d6201460&i=${selectedMovieId}`);
+    const data: Response = yield fetch(`https://www.omdbapi.com/?apikey=d6201460&i=${selectedMovieId}`);
     const movie: SelectedMovie = yield data.json();
     yield put(setSelectedMovie(movie));
 }
