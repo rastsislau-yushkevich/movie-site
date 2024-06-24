@@ -22,7 +22,7 @@ jobs:
       - run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
       - run: chmod 600 "$HOME/.ssh/key"
       # Build
-      - run: npm ci
-      - run: npm run build
+      # - run: npm ci
+      # - run: npm run build
       # Deploy
       - run: cd build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . f0999951@f0999951.xsph.ru:/home/f0999951/domains/f0999951.xsph.ru/public_html/
