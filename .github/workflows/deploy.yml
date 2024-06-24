@@ -25,4 +25,4 @@ jobs:
       # - run: npm ci
       # - run: npm run build
       # Deploy
-      - run: cd build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . f0999951@f0999951.xsph.ru:/home/f0999951/domains/f0999951.xsph.ru/public_html/
+      - run: cd movie-site && cd build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . f0999951@f0999951.xsph.ru:/home/f0999951/domains/f0999951.xsph.ru/public_html/
